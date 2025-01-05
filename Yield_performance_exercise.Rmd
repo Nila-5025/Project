@@ -1,0 +1,223 @@
+---
+title: "EDA"
+output: html_notebook
+---
+## Here I interpreting Exploratory Data Analysis (EDA) with 'Yield Performance'data set.First I import data by browsing from the specific location of our device.Here our data is saved as Yield Performance.xlsx form.After importing the data I need to read the data by R notebook.First, I loads the readxl package, which is necessary for reading Excel files. Then, i uses the read_excel() function to read the data from the specified file located at "D:/Yield Performance.xlsx" and stores the contents in a variable called Yield_Performance. Finally, the View() function displays the data in a table format within RStudio, allowing you to visually inspect the dataset.Then I can found the dataset with 25 obsevation of 9 variables.
+
+```{r}
+library(readxl)
+Yield_Performance <- read_excel("D:/Yield Performance.xlsx")
+View(Yield_Performance)
+```
+
+
+### The code results showing all the data of GY coloum of the data set named as Yield_Performance in the previous code.The $ symbol is used to reference a specific column by name. 
+
+```{r}
+Yield_Performance$GY
+```
+
+
+### The code Yield_Performance[5,] shows all the data in the 5th row of the Yield_Performance table.The first value of the braket shows the row number of the dataset.It means all the data of fifth number row. 
+
+```{r}
+Yield_Performance[5,]
+```
+
+
+
+### The code Yield_Performance[5,4] shows the value in the 5th row and 4th column of the Yield_Performance table.From the dataset it can be found that the data of 5th row and 4th colum is Grain yield 3.1.
+```{r}
+Yield_Performance[5,4]
+```
+
+
+
+### The code Yield_Performance[,4] displays all the values in the 4th column of the Yield_Performance dataset.4th column is the column of Grain yield and all values of the column are shows here.
+
+```{r}
+Yield_Performance[,4]
+```
+
+
+
+# Title: This creates a main title.
+## Sub-title: This creates a secondary heading.
+### Sub-sub-title: This creates a tertiary heading.
+Body: This is regular text, typically used as the content or explanation.
+
+
+
+### For creating advanced graphics and plots in R, here I library a package named as ggplot2.
+```{r}
+library(ggplot2)
+```
+
+
+
+### The code creates a scatter plot using the ggplot2 package in R.It tells R to create a plot using the Yield_Performance dataset.aes(x=GP, y=GY, colour=Env) specifies that:aes means aesthetic that specify the x and y axis with specific variable.Genotype performance(GP) (on the x-axis) represents the first variable.Grain yield(GY) (on the y-axis) represents the second variable.Environment(Location) will determine different location the color of the points, which means each point will have a different color based on the values of Env.geom_point() adds the points (scatter plot) to the plot, representing the relationship between GP and GY. The scatter plot can show whether specific genotypes tend to perform better in terms of grain yield across environments. For example, a genotype with consistently higher GY would indicate good performance across all or most environments.
+```{r}
+ggplot(Yield_Performance,aes(x=GP,y=GY, colour = Env))+
+  geom_point()
+```
+
+### This code imlies in the imported data set,the 3rd column corresponds to the Gen (Genotype), and the 4th row corresponds to the observation for S4 (Sample 4).After running Yield_Performance[4,3], it will return the value for the Genotype in Sample 4, which is G4
+```{r}
+Yield_Performance[4,3]
+```
+# Scatter plot
+```{r}
+ggplot(Yield_Performance,aes(x=GP,y=GY,colour = Env))+geom_point()
+```
+### The R code Yield_Performance[20,4] is used to extract the value located in the 20th row and 4th column of the dataset Yield_Performance.The 4th column corresponds to Grain Yield (GY), and the 20th row corresponds to S20 (Sample 20).So after running Yield_Performance[20,4], it will show Grain Yield (GY) for Sample 20 (S20) is 4.24 (t/ha).
+```{r}
+Yield_Performance[20,4]
+```
+
+
+
+### ggplot(Yield_Performance)creates a plot using the Yield_Performance dataset.aes(x = GP, y = GY, colour = Env):here,x = GP(The Genotypic Performance (GP) is plotted on the x-axis.y = GY=(The Grain Yield (GY) is plotted on the y-axis).colour = Env(The points will be colored based on the Environment (Env) variable. This helps differentiate the data points from various environments (like Barishal, Cumilla, etc).geom_point(size = 4)indicates points of the plot, with a size of 4. The size specifies how large the individual data points will appear on the plot.The plot will help to visualize the relationship between Genotypic Performance (GP) and Grain Yield (GY).If better genotypic performance leads to higher yieldsor not.The colors of the points allow you to compare how Grain Yield varies across different environments for each genotype
+```{r}
+ggplot(Yield_Performance,aes(x=GP,y=GY,colour = Env))+geom_point(size=4)
+```
+
+
+### ggplot(Yield_Performance)creates a plot using the Yield_Performance dataset.aes(x = GP, y = GY, colour = Env):here,x = GP(The Genotypic Performance (GP) is plotted on the x-axis.y = GY=(The Grain Yield (GY) is plotted on the y-axis).colour = Env(The points will be colored based on the Environment (Env) variable. This helps differentiate the data points from various environments (like Barishal, Cumilla, etc).geom_point() adds points to the plot (scatter plot).aes(shape = factor(Env)) functions by Changeing the shape of the points based on the Environment (Env). Each environment will have a different point shape (e.g., circles for one environment, triangles for another).Different colors represent different environments, and different shapes represent each environment's data points.For example,IN the graph,the genotypic performance in comparison ti grain yield of Gazipur is indicating by Green color square shape weather in Rajshahi it is indicating through blue color plus sign.
+```{r}
+ggplot(Yield_Performance,aes(x=GP,y=GY,colour = Env))+geom_point(aes(shape =factor(Env)))
+```
+
+
+
+### ggplot(Yield_Performance)creates a plot using the Yield_Performance dataset.aes(x = GP, y = GY, colour = Env):here,x = GP(The Genotypic Performance (GP) is plotted on the x-axis.y = GY=(The Grain Yield (GY) is plotted on the y-axis).colour = Env(The points will be colored based on the Environment (Env) variable. This helps differentiate the data points from various environments (like Barishal, Cumilla, etc).geom_point() adds points to the plot (scatter plot).aes(shape = factor(Env)) functions by Changeing the shape of the points based on the Environment (Env). Each environment will have a different point shape (e.g., circles for one environment, triangles for another).Different colors represent different environments, and different shapes represent each environment's data points.Each point is labeled with the value of Gen (Genotype), nudged slightly to avoid overlap with the points.The plot uses the theme_bw() function, which applies a clean black-and-white background to the plot for better readability.This scatter plot helps to visualize how Grain Yield (GY) correlates with genotypic potential (GP) for different genotypes (Gen), with the points differentiated by the Environment (Env). The plot also labels each point with the corresponding genotype (Gen) to provide additional context for each data point.
+
+```{r}
+ggplot(Yield_Performance,aes(x=GP,y=GY,colour = Env))+geom_point(aes(shape =factor(Env)))+
+  geom_text(label=Yield_Performance$Gen, nudge_x=.25,nudge_y =.25 )+theme_bw()
+```
+
+
+
+
+
+### ggplot(Yield_Performance)creates a plot using the Yield_Performance dataset.aes(x = GP, y = GY, colour = Env):here,x = GP(The Genotypic Performance (GP) is plotted on the x-axis.y = GY=(The Grain Yield (GY) is plotted on the y-axis).colour = Env(The points will be colored based on the Environment (Env) variable. This helps differentiate the data points from various environments (like Barishal, Cumilla, etc).geom_point() adds points to the plot (scatter plot).aes(shape = factor(Env)) functions by Changeing the shape of the points based on the Environment (Env). Each environment will have a different point shape (e.g., circles for one environment, triangles for another).Different colors represent different environments, and different shapes represent each environment's data points.Each point is labeled with the value of Gen (Genotype), nudged slightly to avoid overlap with the points.The plot uses the theme_dark() function, which applies a dark background to the plot, making the colors and shapes of the points stand out more vividly.This scatter plot helps to visualize how Grain Yield (GY) correlates with genotypic potential (GP) for different genotypes (Gen), with the points differentiated by the Environment (Env). The plot also labels each point with the corresponding genotype (Gen) to provide additional context for each data point. The dark background enhances the contrast, making the plot easier to read in certain contexts, especially when printed in dark-themed environments.
+
+```{r}
+ggplot(Yield_Performance,aes(x=GP,y=GY,colour = Env))+geom_point(aes(shape =factor(Env)))+
+  geom_text(label=Yield_Performance$Gen, nudge_x=.25,nudge_y =.25 )+
+  theme_dark()
+
+```
+
+
+
+
+
+
+
+
+### ggplot(Yield_Performance)creates a plot using the Yield_Performance dataset.aes(x = GP, y = GY, colour = Env):here,x = GP(The Genotypic Performance (GP) is plotted on the x-axis.y = GY=(The Grain Yield (GY) is plotted on the y-axis).colour = Env(The points will be colored based on the Environment (Env) variable. This helps differentiate the data points from various environments (like Barishal, Cumilla, etc).geom_point() adds points to the plot (scatter plot).aes(shape = factor(Env)) functions by Changeing the shape of the points based on the Environment (Env). Each environment will have a different point shape (e.g., circles for one environment, triangles for another).Different colors represent different environments, and different shapes represent each environment's data points.Each point is labeled with the value of Gen (Genotype), nudged slightly to avoid overlap with the points.The plot uses theme_classic(), which gives the plot a simple and clean appearance, with minimal grid lines, making the data points and labels more prominent.This scatter plot helps to visualize how Grain Yield (GY) correlates with genotypic potential (GP) for different genotypes (Gen), with the points differentiated by the Environment (Env). The plot also labels each point with the corresponding genotype (Gen) to provide additional context for each data point.The classic theme provides a clean, straightforward look, ideal for presentations or reports where clarity is key. 
+```{r}
+ggplot(Yield_Performance,aes(x=GP,y=GY,colour = Env))+geom_point(aes(shape =factor(Env)))+
+  geom_text(label=Yield_Performance$Gen, nudge_x=.25,nudge_y =.25 )+
+  theme_classic()
+```
+
+# Bar chart
+### The provided R code uses ggplot2 to create a bar plot.ggplot(Yield_Performance, aes(x=Env, y=GY)),here This part specifies the data and the variables for plotting. It uses the Yield_Performance dataset and maps the Env (environment) variable to the x-axis and the GY (grain yield) variable to the y-axis. geom_bar(stat="identity"): This adds bars to the plot. The stat="identity" argument tells ggplot to use the actual values of GY for the heights of the bars. The plot will show bars where the x-axis represents different environments (Env), and the height of each bar represents the grain yield (GY) for each environment. Each bar's height indicates how much grain was produced in each environment.Locationwise grain yield shown in the bar.Position_dodge2() is used to dodge bars, which is typically used when having multiple groups within a single x-axis category. In this case, the groups would be the genotypes (Gen).
+```{r}
+ggplot(Yield_Performance,aes(x=Env,y=GY))+geom_bar(stat ="identity",position =position_dodge2())
+```
+
+
+
+
+
+
+
+### Without dodge2 function, all the bars are assembled together having multiple groups within single x axis.
+```{r}
+ggplot(Yield_Performance,aes(x=Env,y=GY))+geom_bar(stat ="identity")
+
+```
+
+
+
+
+### Here the code explain-x = Env: The x-axis represents the different environments (such as Barishal, Cumilla, etc.). y = GY: The y-axis shows the grain yield for each environment. fill = Env: This means the bars will be filled with different colors based on the environment. geom_bar(stat = "identity", position = position_dodge2()):stat = "identity": The height of the bars corresponds directly to the grain yield (GY), rather than the count of observation. The plot helps to see which environment has the highest grain yield overall. For example,the bars for Barishal are taller than for other environments, it means Barishal has the highest yield across all environments.
+
+```{r}
+ggplot(Yield_Performance,aes(x=Env,y=GY,fill = Env))+geom_bar(stat ="identity",position =position_dodge2())
+```
+
+
+
+
+
+
+### Here the code explains, The x-axis represents the different environments (such as Barishal, Cumilla, etc.). y = GY: The y-axis shows the grain yield for each environment. fill = Env: This means the bars will be filled with different colors based on the environment. geom_bar(stat = "identity", position = position_dodge2()):stat = "identity": The height of the bars corresponds directly to the grain yield (GY), rather than the count of observation. The plot helps to see which environment has the highest grain yield overall. For example,the bars for Barishal are taller than for other environments, it means Barishal has the highest yield across all environments.xlab("Location"): The x-axis is labeled as "Location" (representing the environments). ylab("Grain Yield(t/ha)"): The y-axis is labeled "Grain Yield (t/ha)" to show that the yield is measured in tons per hectare. Theme_classic means the plot uses a clean and simple theme without gridlines for a clearer presentation.
+```{r}
+ggplot(Yield_Performance,aes(x=Env,y=GY,fill = Env))+geom_bar(stat ="identity",position =position_dodge2())+
+  xlab("Location")+ ylab("Grain Yield(t/ha)")+theme_classic()
+```
+
+
+
+
+
+### Bars for each environment (Env) are placed directly on top of each other, meaning the bars for different environments will overlap if they have the same x-value.Bars for each environment are not "dodged" (side by side) using position_dodge2(). This means if there are multiple bars for a single environment (e.g., for different genotypes), they will be displayed all together by overlapping.Using this  only have one data point (such as the average yield for each environment) and don't need to differentiate within the environment.
+```{r}
+ggplot(Yield_Performance,aes(x=Env,y=GY,fill = Env))+geom_bar(stat ="identity")+
+  xlab("Location")+ ylab("Grain Yield(t/ha)")+theme_classic()
+
+```
+
+
+
+
+
+### This specifies custom colors for each environment. The values argument lists five colors (black, blue, orange, red, and green) that will be used for the different locations (environments). These colors will be applied to the bars in the plot.
+```{r}
+ggplot(Yield_Performance,aes(x=Env,y=GY,fill = Env))+scale_fill_manual(values=c("black","blue","orange","red","green"))+
+  geom_bar(stat ="identity")+
+  xlab("Location")+ ylab("Grain Yield(t/ha)")+theme_classic()
+
+```
+
+
+
+### Load metan package from library 
+```{r}
+library(metan)
+```
+
+
+### The code inspect the desired column at rows 4 to 9 from the Yield_Performance dataset. The inspect() function will show  a quick summary of the data in those rows, including the values for each column (like grain yield, environment, etc.). It helps to check the data in those specific rows.
+```{r}
+inspect(Yield_Performance[4:9])
+
+```
+
+
+
+
+### The code inspect the desired column at rows 4 to 9 from the Yield_Performance dataset. The inspect() function will show  a quick summary of the data in those rows, including the values for each column (like grain yield, environment, etc.). It helps to check the data in those specific rows.This tells R to also generate a plot of the data in rows 4 to 9.R will also create a plot (such as a bar chart, scatter plot, or another type) to  visually explore this part of the dataset.
+```{r}
+inspect(Yield_Performance[4:9],plot =T )
+```
+
+
+
+
+### This function is used to identify outliers in the given data. It will check for values that significantly deviate from the rest of the data.Number of possible outliers found 2 and there is difference between mean with or without outliers. 
+```{r}
+find_outliers(Yield_Performance$GY)
+```
+
+
+
+### This function identifies outliers in the provided data.This argument tells R to generate a plot along with the outlier detection. The plot might include visual representations like boxplots or scatter plots that highlight the outliers.Interpreting differences of the obseved data with and without outliers.
+```{r}
+find_outliers(Yield_Performance$GY,plots =T)
+```
+
